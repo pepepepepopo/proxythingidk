@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Test</title>
+</head>
+<body>
+    <input type="text" id="urlInput" placeholder="Enter URL">
+    <button onclick="fetchProxy()">Fetch</button>
+    <pre id="output"></pre>
+
+    <script>
+        async function fetchProxy() {
+            const url = document.getElementById("urlInput").value;
+            const response = await fetch("http://localhost:8080", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ url })
+            });
+            const result = await response.json();
+            document.getElementById("output").textContent = JSON.stringify(result, null, 2);
+        }
+    </script>
+</body>
+</html>
